@@ -6,7 +6,7 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-app.get("/read", async (req, res) => {
+app.get("/", async (req, res) => {
   res.send("Server is up and running!");
 });
 
