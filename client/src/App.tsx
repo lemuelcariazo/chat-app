@@ -43,10 +43,10 @@ function App() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <form className="w-96 flex justify-center align-center flex-col gap-10 ">
+              <form className="w-96 flex justify-center align-center flex-col gap-10 mt-5">
                 <Input
                   variant="flushed"
-                  placeholder="Enter Email or Username"
+                  placeholder="Enter Email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

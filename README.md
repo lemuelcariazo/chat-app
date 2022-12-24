@@ -16,4 +16,9 @@ the 3 ways of persistence of account
 :: Using a Cookie to store user data, and this is automatically attached to each request made to the server by the web browser.
 :: The most secure, is using Sessions based authentication.
 
-
+{
+    username: {
+        type: string,
+        
+    }
+}
