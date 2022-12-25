@@ -15,15 +15,9 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  useColorMode,
 } from "@chakra-ui/react";
-import {
-  PhoneIcon,
-  AddIcon,
-  WarningIcon,
-  ViewIcon,
-  ViewOffIcon,
-  EmailIcon,
-} from "@chakra-ui/icons";
+import { ViewIcon, ViewOffIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 
 function App() {
   const [username, setUsername] = useState<string>("");
@@ -33,10 +27,25 @@ function App() {
   const [profileImage, setProfileImage] = useState("");
   const [show, setShow] = useState<boolean>(false);
 
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
-    <div className="App dark:bg-slate-900 dark:text-slate-50 bg-slate-200 text-slate-900 w-screen h-screen flex justify-center items-center flex-col">
-      <>
-        <Tabs className="h-2/3" isFitted variant="unstyled">
+    <>
+      <header className="absolute right-2 top-2">
+        <Button
+          onClick={toggleColorMode}
+          className="absolute"
+          color={"blackAlpha.900"}
+        >
+          {colorMode === "light" ? (
+            <SunIcon color="yellow.700" />
+          ) : (
+            <MoonIcon color="red.500" />
+          )}
+        </Button>
+      </header>
+      <div className="App flex justify-center items-center w-screen h-screen">
+        <Tabs isFitted variant="unstyled">
           <TabList>
             <Tab className="hover:text-slate-400">Login</Tab>
             <Tab className="hover:text-slate-400">Register</Tab>
@@ -113,7 +122,7 @@ function App() {
                       {!show ? (
                         <ViewOffIcon boxSize={17} />
                       ) : (
-                        <ViewIcon boxSize={17} color="red.900" />
+                        <ViewIcon boxSize={17} />
                       )}
                     </Button>
                   </InputRightElement>
@@ -136,8 +145,8 @@ function App() {
             </TabPanel>
           </TabPanels>
         </Tabs>
-      </>
-    </div>
+      </div>
+    </>
   );
 }
 
