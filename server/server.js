@@ -1,27 +1,44 @@
 const express = require("express");
 const app = express();
-const sessions = require("express-session");
-console.log(sessions);
+const mongoose = require("mongoose");
+
+const { handleNewUser } = require("./controllers/registerController");
 const cors = require("cors");
+const User = require("./models/User");
 require("dotenv").config();
 
-app.use(cors());
+// Express Body parser
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
-app.get("/", async (req, res) => {
-  res.send("Server is up and running!");
-});
-
-app.post("/", async (req, res) => {
-  const { username, password } = req.body;
-  if (username === "ediwow" && password === "ediwow") {
-    res.send("Login Successfully");
-  } else {
-    res.send("nah!");
+// connect db
+mongoose.set("strictQuery", true);
+mongoose.connect(
+  process.env.URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (error) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("connection established");
+    }
   }
+);
+
+app.post("/register", handleNewUser);
+// app.post("/login", handleLogin);
+
+app.get("/", (req, res) => {
+  res.send("Working properly");
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`The server is running at http://localhost:${PORT}`);
 });
+
+
