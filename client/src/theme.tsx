@@ -5,10 +5,18 @@ const theme = {
     initialColorMode: "dark",
     useSystemColorMode: true,
   },
+  breakpoints: {
+    sm: "30em",
+    md: "48em",
+    lg: "62em",
+    xl: "80em",
+    "2xl": "96em",
+  },
+
   styles: {
     global: {
       "html, body": {
-        color: "gray.600",
+        color: "red.600",
         lineHeight: "tall",
       },
       a: {

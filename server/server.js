@@ -1,21 +1,22 @@
+const userRoutes = require("./routes/userRoutes");
+const { development } = require("./config/config");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
-const { handleNewUser } = require("./controllers/registerController");
 const cors = require("cors");
-const User = require("./models/User");
-require("dotenv").config();
 
 // Express Body parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 // connect db
 mongoose.set("strictQuery", true);
 mongoose.connect(
-  process.env.URI,
+  development.database.user,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -29,16 +30,15 @@ mongoose.connect(
   }
 );
 
-app.post("/register", handleNewUser);
-// app.post("/login", handleLogin);
+app.use("/api", userRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Working properly");
+const port = development.port || 5000;
+app.listen(port, () => {
+  console.log(`The server is running at http://localhost:${port}`);
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`The server is running at http://localhost:${PORT}`);
-});
-
-
+// config
+// controllers
+// models
+// routes
+// utils

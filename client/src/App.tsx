@@ -1,41 +1,26 @@
-import { useState } from "react";
-import {
-  Input,
-  Button,
-  InputRightElement,
-  ButtonGroup,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  InputGroup,
-  IconButton,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  useColorMode,
-} from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
+import "./App.css";
+import { Button, useColorMode, Box } from "@chakra-ui/react";
+import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 
 function App() {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [cPassword, setCPassword] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [profileImage, setProfileImage] = useState("");
-  const [show, setShow] = useState<boolean>(false);
-
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <>
-      <header className="absolute right-2 top-2">
+    <div className="App h-screen w-screen ">
+      {/* I learned how the breakpoints works and the style props */}
+      {/* I will create form and that form will be responsive  */}
+
+      <Box
+        w={["100%", "40%", "35%"]}
+        h={["100%", "40%", "35%"]}
+        backgroundColor="red.100"
+        className="w-fit h-fit"
+      >
+        <h1>Hello, Chat App</h1>
         <Button
           onClick={toggleColorMode}
-          className="absolute"
           color={"blackAlpha.900"}
+          colorScheme="white"
         >
           {colorMode === "light" ? (
             <SunIcon color="yellow.700" />
@@ -43,110 +28,8 @@ function App() {
             <MoonIcon color="red.500" />
           )}
         </Button>
-      </header>
-      <div className="App flex justify-center items-center w-screen h-screen">
-        <Tabs isFitted variant="unstyled">
-          <TabList>
-            <Tab className="hover:text-slate-400">Login</Tab>
-            <Tab className="hover:text-slate-400">Register</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <form className="w-96 flex justify-center align-center flex-col gap-10 mt-5">
-                <Input
-                  variant="flushed"
-                  placeholder="Enter Email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <InputGroup>
-                  <Input
-                    variant="flushed"
-                    placeholder="Enter password"
-                    type={show ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <InputRightElement className="text-slate-900">
-                    <Button
-                      h="1.75rem"
-                      size="sm"
-                      onClick={() => setShow(!show)}
-                    >
-                      {!show ? (
-                        <ViewOffIcon boxSize={17} />
-                      ) : (
-                        <ViewIcon boxSize={17} color="red.900" />
-                      )}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-
-                <Button colorScheme="teal" variant="outline">
-                  LOGIN
-                </Button>
-              </form>
-            </TabPanel>
-            <TabPanel>
-              <form className="w-96 flex justify-center align-center flex-col gap-10 ">
-                <Input
-                  variant="flushed"
-                  placeholder="Enter Username"
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-
-                <Input
-                  variant="flushed"
-                  placeholder="Enter Email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <InputGroup>
-                  <Input
-                    variant="flushed"
-                    placeholder="Enter password"
-                    type={show ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <InputRightElement className="text-slate-900">
-                    <Button
-                      h="1.75rem"
-                      size="sm"
-                      onClick={() => setShow(!show)}
-                    >
-                      {!show ? (
-                        <ViewOffIcon boxSize={17} />
-                      ) : (
-                        <ViewIcon boxSize={17} />
-                      )}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-
-                <InputGroup>
-                  <Input
-                    variant="flushed"
-                    placeholder="Confirm password"
-                    type={show ? "text" : "password"}
-                    value={cPassword}
-                    onChange={(e) => setCPassword(e.target.value)}
-                  />
-                </InputGroup>
-
-                <Button colorScheme="teal" variant="outline">
-                  LOGIN
-                </Button>
-              </form>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </div>
-    </>
+      </Box>
+    </div>
   );
 }
 
