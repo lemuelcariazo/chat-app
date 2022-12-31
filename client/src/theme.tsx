@@ -12,16 +12,24 @@ const theme = {
     xl: "80em",
     "2xl": "96em",
   },
+  fonts: {
+    body: '"Open Sans", sans-serif',
+    heading: '"Roboto", sans-serif',
+  },
 
   styles: {
     global: {
       "html, body": {
-        color: "red.600",
+        // color: "",
         lineHeight: "tall",
       },
+
       a: {
         color: "teal.500",
       },
+      // Input: {
+      //   color: "black",
+      // },
     },
   },
 };
