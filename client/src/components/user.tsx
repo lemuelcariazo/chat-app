@@ -48,11 +48,11 @@ const userCredentials = () => {
         navigate("/chat");
       })
       .catch((e) => {
-        setIsLoading(false);
         console.log({
           modal: e.message,
           status: e.status,
         });
+        setIsLoading(false);
       });
   };
 
