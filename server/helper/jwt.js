@@ -1,23 +1,28 @@
-const { sign, verify } = require("jsonwebtoken");
+const { sign, verify, decode } = require("jsonwebtoken");
 
 const createJWT = (user) => {
-  const accessToken = sign({ user }, process.env.JWT_SECRET, {
+  return sign({ user }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
-  return accessToken;
 };
 
 const validateJWT = async (req, res, next) => {
-  const cookie = await req.cookies.jwt;
   try {
-    verify(cookie, process.env.JWT_SECRET);
+    const cookieToken = await req.cookies.jwt;
+    const decoded = verify(cookieToken, process.env.JWT_SECRET);
+
+    req.validated = decoded;
     return next();
   } catch (e) {
-    res.status(404).json({
-      message: "Not Accessible",
+    return res.status(403).json({
+      message: e,
+      error: "Please Login",
     });
   }
-};
+}; // need some changes
 
 module.exports = { createJWT, validateJWT };
 // already done
+
+//   button <login> => handleLogin => axios.post {email, password} => must be async await =>
+//   console.log(res {login successully} ) if success then call getProtectedProfile to get the userData

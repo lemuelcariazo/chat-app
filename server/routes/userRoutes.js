@@ -1,16 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { validateJWT } = require("../helper/jwt");
+const { authenticate, authorize } = require("../auth");
+const { validateJWT, decodeJWT } = require("../helper/jwt");
 const {
   handleLogin,
   handleRegister,
   handleProfile,
+  handleLogout,
 } = require("../controllers/userController");
 
-router.post("/login", handleLogin);
+router.post("/login", authenticate, handleLogin); // authenticate login
 router.post("/register", handleRegister);
-
-router.get("/profile", validateJWT, handleProfile);
+router.get("/protected", validateJWT, handleProfile);
+router.delete("/logout", handleLogout);
 
 module.exports = router;
 

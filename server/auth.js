@@ -1,13 +1,17 @@
 const { findUser } = require("./helper/findUser");
 const { comparePassword } = require("./helper/bcrypt");
+const { createJWT, validateJWT } = require("./helper/jwt");
+const { saveCookie } = require("./helper/cookie");
+const { validate } = require("./models/User");
 
-const authUser = async (email, password, user) => {
+const authenticate = async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await findUser(email);
   if (!user) {
     return res.status(401).json({
-      message: "Wrong Username and Password",
+      message: "Invalid User",
     });
   }
-  const token = createJWT(user);
   const hashedPwd = user.password;
   const comparePwd = await comparePassword(password, hashedPwd);
   if (!comparePwd) {
@@ -15,6 +19,31 @@ const authUser = async (email, password, user) => {
       message: "Wrong Username and Password",
     });
   }
+
+  const token = createJWT(user, res);
+
+  saveCookie(token, res);
+  try {
+    return next();
+  } catch (e) {
+    res.status(e.status).json({
+      message: e.message,
+    });
+  }
 };
 
-module.exports = { authUser };
+const authorize = async (req, res, next) => {
+  try {
+    await validateJWT(req);
+    return next();
+  } catch (e) {
+    res.status(403).json({
+      message: "Not Authorized",
+    });
+  }
+}; // need some changes
+
+module.exports = {
+  authenticate,
+  authorize,
+};

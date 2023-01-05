@@ -236,3 +236,14 @@ mongosh "mongodb+srv://<username>:<password>@chat-app.wlpx3lu.mongodb.net/chat-a
 │   ├── tsconfig.json
 ├── package.json
 └── tsconfig.json -->
+
+<!-- user:{
+    login: gotoPage()
+    register: required
+    logout: ?
+    gotoPage: ()=>{
+        {
+            mainPage: "/Home"
+        }
+    }
+} -->
