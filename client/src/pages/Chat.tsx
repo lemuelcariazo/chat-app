@@ -27,9 +27,14 @@ function Chat() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/protected").then((res) => {
-      console.log(res);
-    });
+    axios
+      .get("http://localhost:8080/api/protected")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
 
   return (
