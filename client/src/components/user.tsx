@@ -50,7 +50,7 @@ const userCredentials = () => {
       .catch((e) => {
         console.log({
           modal: e.message,
-          status: e.status,
+          error: e.response.data.message,
         });
         setIsLoading(false);
       });

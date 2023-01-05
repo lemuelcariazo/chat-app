@@ -9,7 +9,7 @@ const authenticate = async (req, res, next) => {
   const user = await findUser(email);
   if (!user) {
     return res.status(401).json({
-      message: "Invalid User",
+      message: "Wrong Username and Password",
     });
   }
   const hashedPwd = user.password;
