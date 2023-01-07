@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 function Chat() {
   // const [isLogout, setIsLogout] = useState(false);
   const navigate = useNavigate();
+  const [name, setName] = useState("");
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -30,7 +31,8 @@ function Chat() {
     axios
       .get("http://localhost:8080/api/protected")
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setName(res.data.email);
       })
       .catch((e) => {
         console.log(e);
@@ -39,7 +41,7 @@ function Chat() {
 
   return (
     <div className="w-screen h-screen flex justify-center items-center flex-col">
-      <h1>Hi I am Chat page</h1>
+      <h1>{`Hi Welcome to Chat ${name}`}</h1>
       <Button
         colorScheme="twitter"
         onClick={handleLogout}

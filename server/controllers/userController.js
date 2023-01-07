@@ -51,9 +51,7 @@ const handleProfile = async (req, res) => {
   const { _id, email, password } = req.validated.user;
   try {
     return res.json({
-      id: _id,
       email: email,
-      pw: password,
     });
   } catch (e) {
     return res.send(e);

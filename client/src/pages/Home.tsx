@@ -1,5 +1,8 @@
 import React from "react";
 import UserCredentials from "../components/user";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 function Home() {
   return (

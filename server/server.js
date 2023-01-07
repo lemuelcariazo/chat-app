@@ -12,7 +12,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 // connect db
 mongoose.set("strictQuery", true);
@@ -35,7 +41,7 @@ app.use("/api", userRoutes);
 
 const port = development.port || 5000;
 app.listen(port, () => {
-  console.log(`The server is running at http://localhost:${port}`);
+  console.log(`The server is running at http://127.0.0.1:${port}`);
 });
 
 // config
@@ -43,3 +49,5 @@ app.listen(port, () => {
 // models
 // routes
 // utils
+
+//  Local:   http://127.0.0.1:5173/
