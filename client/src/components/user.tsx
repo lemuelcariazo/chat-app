@@ -36,7 +36,7 @@ const userCredentials = () => {
     }
     // http://localhost:8080/api/login
     axios
-      .post("chat-app-5j5o-kh7dmm7f6-lemuelcariazo.vercel.app/login", {
+      .post("https://chat-app-5j5o.vercel.app/login", {
         email: email,
         password: password,
       })
