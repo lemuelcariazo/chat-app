@@ -1,4 +1,4 @@
-import User from "../components/User";
+import User from "../components/UserContainer";
 
 function Home() {
   return (

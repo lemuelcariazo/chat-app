@@ -3,7 +3,7 @@ import Login from "./Login";
 
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 
-const User = () => {
+const UserContainer = () => {
   return (
     <>
       <Tabs
@@ -48,4 +48,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserContainer;
