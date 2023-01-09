@@ -41,7 +41,7 @@ app.use("/api", userRoutes);
 
 const port = development.port || 5000;
 app.listen(port, () => {
-  console.log(`The server is running at http://127.0.0.1:${port}`);
+  console.log(`The server is running at http://localhost:${port}`);
 });
 
 // config

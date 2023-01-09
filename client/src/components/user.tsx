@@ -1,120 +1,51 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Register from "./Register";
+import Login from "./Login";
 
-import {
-  Button,
-  FormControl,
-  Input,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-  useControllableProp,
-  useControllableState,
-} from "@chakra-ui/react";
-import axios from "axios";
-import Chat from "../pages/Chat";
+import { Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 
-const userCredentials = () => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    if (!email || !password) {
-      console.log(
-        JSON.stringify({
-          modal: "Please Complete Crendentials",
-        })
-      );
-    }
-    // http://localhost:8080/api/login
-    axios
-      .post("https://chat-app-5j5o.vercel.app/login", {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        console.log({
-          modal: res.data.message,
-        });
-        // setIsLogin(true);
-        setIsLoading(false);
-        navigate("/chat");
-      })
-      .catch((e) => {
-        console.log({
-          modal: e.message,
-          error: e.response.data.message,
-        });
-        setIsLoading(false);
-      });
-  };
-
+const User = () => {
   return (
     <>
-      <FormControl
+      <Tabs
+        isLazy
+        isFitted
+        variant="unStyled"
         w={["80%", "50%", "40%", "30%"]}
         h={["350", "350", "350", "350"]}
-        className="flex items-center justify-center bg-sky-900 text-slate-900 rounded-lg "
+        boxShadow="2xl"
+        className="rounded-md py-4"
       >
-        <Tabs
-          isFitted
-          colorScheme="whiteAlpha.900"
-          size="md"
-          className="w-full h-full"
-        >
-          <TabList>
-            <Tab>Login</Tab>
-            <Tab>Register</Tab>
-          </TabList>
-
-          <TabPanels>
-            <TabPanel className="flex justify-between items-center flex-col gap-5">
-              <Input
-                variant="filled"
-                placeholder="Email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Input
-                variant="filled"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <Button
-                isLoading={isLoading}
-                loadingText="Logging In"
-                colorScheme="teal"
-                variant="outline"
-                onClick={handleLogin}
-              >
-                Login
-              </Button>
-            </TabPanel>
-            <TabPanel className="flex justify-center items-center flex-col gap-5">
-              <Input variant="filled" placeholder="Username" />
-              <Input variant="filled" placeholder="Email" />
-              <Input variant="filled" placeholder="Password" />
-              <Input variant="filled" placeholder="Confirm Password" />
-
-              <Button variant="outline">Register</Button>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </FormControl>
+        <TabList className="mx-4">
+          <Tab
+            _selected={{
+              color: "white",
+              bg: "teal.400",
+            }}
+            boxShadow="2xl"
+          >
+            Login
+          </Tab>
+          <Tab
+            _selected={{
+              color: "white",
+              bg: "teal.400",
+            }}
+            boxShadow="2xl"
+          >
+            Register
+          </Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="flex flex-col gap-32">
+            <Login />
+          </TabPanel>
+          <TabPanel className="flex flex-col gap-8">
+            <Register />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </>
   );
 };
 
-export default userCredentials;
+export default User;

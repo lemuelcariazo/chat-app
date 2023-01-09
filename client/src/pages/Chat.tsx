@@ -1,51 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
+  Box,
   useControllableProp,
   useControllableState,
 } from "@chakra-ui/react";
 import { ArrowDownIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+import { UserContext } from "../utils/UserContext";
 
 function Chat() {
-  // const [isLogout, setIsLogout] = useState(false);
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  // const msg = useContext(UserContext);
+  const protectedURL: string = "http://localhost:8080/api/protected";
+  const [isLoading, setIsloading] = useState<boolean>(false);
+  const { data, loading, error } = useFetch(protectedURL);
 
-  const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
-    axios
-      .delete("http://localhost:8080/api/logout")
-      .then((res) => {
-        console.log(res.data.message);
-        navigate("/");
-      })
-      .catch((e) => {
-        console.log(e);
+    setIsloading(true);
+    try {
+      const response = await axios.delete("http://localhost:8080/api/logout");
+      console.log({
+        modal: response.data?.message,
       });
+      navigate("/");
+    } catch (e: any) {
+      console.log({
+        error: e.response.data.message,
+      });
+    } finally {
+      setIsloading(false);
+    }
   };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/protected")
-      .then((res) => {
-        console.log(res.data);
-        setName(res.data.email);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
 
   return (
     <div className="w-screen h-screen flex justify-center items-center flex-col">
-      <h1>{`Hi Welcome to Chat ${name}`}</h1>
+      {/* <h1>Test UseContext: {msg}</h1> */}
+      <h1 className="font-extrabold">{`Hi, Welcome ${data?.username}`}</h1>
+      <Box>
+        <h1 className="text-40 font-extrabold w-screen text-center">
+          This Chat page is Under Construction, Stay tuned!
+        </h1>
+      </Box>
       <Button
+        isLoading={isLoading}
         colorScheme="twitter"
         onClick={handleLogout}
         leftIcon={<ArrowDownIcon />}
+        className="mt-11"
       >
         Logout
       </Button>

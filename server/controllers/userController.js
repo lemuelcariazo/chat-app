@@ -2,28 +2,36 @@ const { deleteCookie } = require("../helper/cookie");
 const { findUser } = require("../helper/findUser");
 const { hashPassword } = require("../helper/bcrypt.js");
 const User = require("../models/User");
+
 const handleRegister = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { username, email, password } = req.body;
+  if (!username || !email || !password) {
     return res
       .status(400)
       .json({ message: "Username and Password are Required" });
   }
-  // check user if exists
+
   const user = await findUser(email);
   if (user) {
     return res.status(401).json({ message: "User already exists!" });
   }
+
+  const usern = await User.findOne({ username });
+  if (usern) {
+    return res.status(401).json({ message: "Username already exists!" });
+  }
+
   try {
     const hashedPwd = await hashPassword(password, 10); // hashed the password
 
     await User.create({
       email: email,
+      username: username,
       password: hashedPwd,
     }); // store new user
 
     return res.status(201).json({
-      success: "New User has been created!",
+      message: "New User has been created!",
     });
   } catch (error) {
     res.status(500).json({
@@ -48,10 +56,11 @@ const handleLogin = async (req, res) => {
 const handleProfile = async (req, res) => {
   // handleProfile has a job to display the users data after the jwt has been validated
 
-  const { _id, email, password } = req.validated.user;
+  const { _id, email, password, username } = req.validated.user;
   try {
     return res.json({
       email: email,
+      username: username,
     });
   } catch (e) {
     return res.send(e);
