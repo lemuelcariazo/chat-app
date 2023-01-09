@@ -76,7 +76,11 @@ function Login() {
         />
       </Box>
 
-      <Button isLoading={isLoading} loadingText="teal" onClick={handleLogin}>
+      <Button
+        isLoading={isLoading}
+        loadingText="Logging In"
+        onClick={handleLogin}
+      >
         Login
       </Button>
     </>
