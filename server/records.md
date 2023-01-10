@@ -1,5 +1,5 @@
 UPDATING GIT
-
+// "dev": "nodemon server.js"
 git add .
 git commit -m "message"
 git branch
