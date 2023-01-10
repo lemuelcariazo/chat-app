@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import {
   Button,
   Box,
+  Spinner,
   useControllableProp,
   useControllableState,
 } from "@chakra-ui/react";
@@ -11,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { UserContext } from "../utils/UserContext";
 import useConfig from "../hooks/useConfig";
-import { Spinner } from "@chakra-ui/react";
 
 function Chat() {
   const navigate = useNavigate();
@@ -40,7 +40,9 @@ function Chat() {
   return (
     <>
       {loading ? (
-        <Spinner size="xl" />
+        <Box className="h-screen w-screen flex justify-center items-center">
+          <Spinner size="xl" />
+        </Box>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center flex-col">
           {/* <h1>Test UseContext: {msg}</h1> */}
