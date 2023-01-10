@@ -40,7 +40,7 @@ function Chat() {
   return (
     <>
       {loading ? (
-        <Box className="h-screen w-screen flex justify-center items-center">
+        <Box className="h-screen w-screen flex justify-center items-center flex-col">
           <Spinner size="xl" />
         </Box>
       ) : (
