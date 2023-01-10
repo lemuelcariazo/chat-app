@@ -6,7 +6,8 @@ function useConfig() {
   };
 
   const config: Config = {
-    BASE_URL: "http://localhost:8080/api/",
+    // BASE_URL: "http://localhost:8080/api/",
+    BASE_URL: "https://chat-app-server-8pvy4xsxu-lemuelcariazo.vercel.app/",
   };
 
   return { config };
