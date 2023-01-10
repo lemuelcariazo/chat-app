@@ -4,8 +4,10 @@ function useConfig() {
   };
 
   const config: Config = {
-    BASE_URL: "http://localhost:8080/api/",
-    // BASE_URL: "https://chat-app-server-tan.vercel.app/api/",
+    // BASE_URL: "http://localhost:8080/api/",
+    BASE_URL:
+      "https://chat-app-server-tan.vercel.app/api/" ||
+      "http://localhost:8080/api/",
   };
 
   return { config };

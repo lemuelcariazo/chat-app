@@ -14,9 +14,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://chat-app-ruddy-one.vercel.app"],
+    origin: ["https://chat-app-ruddy-one.vercel.app"],
     credentials: true,
     allowedHeaders: ["Content-Type"],
+    // "http://localhost:5173",
   })
 );
 
