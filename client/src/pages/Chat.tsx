@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { UserContext } from "../utils/UserContext";
 import useConfig from "../hooks/useConfig";
+import { Spinner } from "@chakra-ui/react";
 
 function Chat() {
   const navigate = useNavigate();
@@ -37,24 +38,30 @@ function Chat() {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-col">
-      {/* <h1>Test UseContext: {msg}</h1> */}
-      <h1 className="font-extrabold">{`Hi, Welcome ${data?.username}`}</h1>
-      <Box>
-        <h1 className="text-40 font-extrabold w-screen text-center">
-          This Chat page is Under Construction, Stay tuned!
-        </h1>
-      </Box>
-      <Button
-        isLoading={isLoading}
-        colorScheme="twitter"
-        onClick={handleLogout}
-        leftIcon={<ArrowDownIcon />}
-        className="mt-11"
-      >
-        Logout
-      </Button>
-    </div>
+    <>
+      {loading ? (
+        <Spinner size="xl" />
+      ) : (
+        <div className="w-screen h-screen flex justify-center items-center flex-col">
+          {/* <h1>Test UseContext: {msg}</h1> */}
+          <h1 className="font-extrabold">{`Hi, Welcome ${data?.username}`}</h1>
+          <Box>
+            <h1 className="text-40 font-extrabold w-screen text-center">
+              This Chat page is Under Construction, Stay tuned!
+            </h1>
+          </Box>
+          <Button
+            isLoading={isLoading}
+            colorScheme="twitter"
+            onClick={handleLogout}
+            leftIcon={<ArrowDownIcon />}
+            className="mt-11"
+          >
+            Logout
+          </Button>
+        </div>
+      )}
+    </>
   );
 }
 
