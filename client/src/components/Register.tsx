@@ -13,6 +13,8 @@ function Register() {
 
   const { config } = useConfig();
 
+  const [modal, setModal] = useState<string>("");
+
   const handleRegister = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -32,16 +34,19 @@ function Register() {
       console.log({
         modal: response.data?.message,
       });
+      setModal(response.data?.message);
     } catch (e: any) {
       console.log({
         error: e.response.data.message,
       });
+      setModal(e.response.data?.message);
     } finally {
       setIsLoading(false);
     }
   };
   return (
     <>
+      {modal ? <h1>{modal}</h1> : null}
       <Box className="flex flex-col gap-2">
         <Input
           type="name"
