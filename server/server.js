@@ -38,6 +38,9 @@ mongoose.connect(
 );
 
 app.use("/api", userRoutes);
+app.get("/read", (req, res) => {
+  res.send("Express is working");
+});
 
 const port = development.port || 5000;
 app.listen(port, () => {
