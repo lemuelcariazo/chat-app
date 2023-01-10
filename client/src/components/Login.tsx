@@ -5,6 +5,7 @@ import axios from "axios";
 
 import { Input, Button, Box } from "@chakra-ui/react";
 import { UserContext } from "../utils/UserContext";
+import useConfig from "../hooks/useConfig";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const { config } = useConfig();
 
   const [msg, setMsg] = useState<any>("");
 
@@ -31,7 +34,7 @@ function Login() {
       );
     }
     axios
-      .post("http://localhost:8080/api/login", {
+      .post(config.BASE_URL + "login", {
         email: email,
         password: password,
       })

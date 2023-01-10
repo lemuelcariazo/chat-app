@@ -10,19 +10,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { UserContext } from "../utils/UserContext";
+import useConfig from "../hooks/useConfig";
 
 function Chat() {
   const navigate = useNavigate();
-  // const msg = useContext(UserContext);
-  const protectedURL: string = "http://localhost:8080/api/protected";
+  const { config } = useConfig();
   const [isLoading, setIsloading] = useState<boolean>(false);
-  const { data, loading, error } = useFetch(protectedURL);
+  const { data, loading, error } = useFetch(config.BASE_URL + "protected");
 
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsloading(true);
     try {
-      const response = await axios.delete("http://localhost:8080/api/logout");
+      const response = await axios.delete(config.BASE_URL + "logout");
       console.log({
         modal: response.data?.message,
       });
