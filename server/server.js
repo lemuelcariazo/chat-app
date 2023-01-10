@@ -38,7 +38,7 @@ mongoose.connect(
 );
 
 app.use("/api", userRoutes);
-app.get("/read", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Express is working");
 });
 
