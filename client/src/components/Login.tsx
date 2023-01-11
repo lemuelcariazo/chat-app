@@ -34,10 +34,16 @@ function Login() {
       );
     }
     axios
-      .post(config.BASE_URL + "login", {
-        email: email,
-        password: password,
-      })
+      .post(
+        config.BASE_URL + "login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log({
           modal: res.data.message,
