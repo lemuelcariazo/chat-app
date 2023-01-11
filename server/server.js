@@ -14,9 +14,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    // origin: "http://localhost:5173",
+    origin: "http://localhost:5173",
     // origin: "*",
-    origin: "https://chat-app-ruddy-one.vercel.app",
+    // origin: "https://chat-app-ruddy-one.vercel.app",
 
     credentials: true,
     // allowedHeaders: ["Content-Type"],
@@ -40,7 +40,7 @@ mongoose.connect(
   }
 );
 
-app.use("/api", userRoutes);
+app.use("/api", routes);
 app.get("/", (req, res) => {
   res.send("Express is working");
 });
