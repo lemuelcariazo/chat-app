@@ -15,9 +15,7 @@ function Login() {
   const [password, setPassword] = useState<string>("");
 
   const { config } = useConfig();
-
   const [msg, setMsg] = useState<any>("");
-
   const { logs, setLogs } = useContext(UserContext);
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,16 +32,10 @@ function Login() {
       );
     }
     axios
-      .post(
-        config.BASE_URL + "login",
-        {
-          email: email,
-          password: password,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+      .post(config.BASE_URL + "login", {
+        email: email,
+        password: password,
+      })
       .then((res) => {
         console.log({
           modal: res.data.message,
@@ -51,7 +43,6 @@ function Login() {
 
         setIsLoading(false);
         setMsg(res.data.message);
-        // setLogs(res); /// teak useContext
         navigate("/chat");
       })
       .catch((e) => {
