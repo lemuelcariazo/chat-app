@@ -1,8 +1,7 @@
-const { findUser } = require("./helper/findUser");
-const { comparePassword } = require("./helper/bcrypt");
-const { createJWT, validateJWT } = require("./helper/jwt");
-const { saveCookie } = require("./helper/cookie");
-const { validate } = require("./models/User");
+const { findUser } = require("../../helper/findUser");
+const { comparePassword } = require("../../helper/bcrypt");
+const { createJWT, validateJWT } = require("../../helper/jwt");
+const { saveCookie } = require("../../helper/cookie");
 
 const authenticate = async (req, res, next) => {
   const { email, password } = req.body;

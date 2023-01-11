@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { authenticate, authorize } = require("../auth");
+const { authenticate, authorize } = require("./auth/auth");
 const { validateJWT, decodeJWT } = require("../helper/jwt");
 const {
   handleLogin,

@@ -1,4 +1,4 @@
-const userRoutes = require("./routes/userRoutes");
+const routes = require("./routes/routes");
 const { development } = require("./config/config");
 const express = require("express");
 const app = express();
