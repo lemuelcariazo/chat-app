@@ -17,7 +17,7 @@ app.use(
     // origin: "http://localhost:5173",
     origin: "*",
     // origin: "https://chat-app-ruddy-one.vercel.app",
-    credentials: true,
+    credentials: false,
     allowedHeaders: ["Content-Type"],
   })
 );
