@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       // "/api": "http://localhost:8080",
-      "/api": "https://chat-app-server-tan.vercel.app",
+      "/api": "https://chat-app-server-one.vercel.app",
     },
   },
   plugins: [react()],
