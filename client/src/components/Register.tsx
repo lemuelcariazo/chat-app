@@ -38,11 +38,14 @@ function Register() {
       console.log("Password not match!");
     }
     try {
-      const response: any = await axios.post(config.BASE_URL + "register", {
-        email: email,
-        username: username,
-        password: password,
-      });
+      const response: any = await axios.post(
+        config.BASE_URL + "/api/register",
+        {
+          email: email,
+          username: username,
+          password: password,
+        }
+      );
       console.log({
         modal: response.data?.message,
       });

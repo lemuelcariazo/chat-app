@@ -1,9 +1,11 @@
-const routes = require("./routes/routes");
 const { development } = require("./config/config");
+const cookieParser = require("cookie-parser");
+const routes = require("./routes/routes");
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
+
+const path = require("path");
 
 const cors = require("cors");
 
@@ -14,9 +16,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
     // origin: "*",
-    // origin: "https://chat-app-ruddy-one.vercel.app",
+    origin: "https://chat-app-ruddy-one.vercel.app",
 
     credentials: true,
     // allowedHeaders: ["Content-Type"],
@@ -42,7 +44,8 @@ mongoose.connect(
 
 app.use("/api", routes);
 app.get("/", (req, res) => {
-  res.send("Express is working");
+  res.send("Express is working" + path.join(__dirname));
+  // console.log(__dirname);
 });
 
 const port = development.port || 5000;

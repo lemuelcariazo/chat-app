@@ -32,7 +32,8 @@ function Login() {
       );
     }
     axios
-      .post(config.BASE_URL + "login", {
+      // config.BASE_URL +
+      .post("/api/login", {
         email: email,
         password: password,
       })
