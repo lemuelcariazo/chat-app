@@ -1,8 +1,8 @@
 const saveCookie = async (token, res) => {
   await res.cookie("jwt", token, {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "None",
     path: "/",
     expires: new Date(Date.now() + 3600000),
   });
