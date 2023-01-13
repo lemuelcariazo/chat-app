@@ -6,11 +6,11 @@ import dns from "dns";
 // dns.setDefaultResultOrder("verbatim");
 
 export default defineConfig({
-  server: {
-    proxy: {
-      // "/api": "http://localhost:8080",
-      "/api": "https://chat-app-server-one.vercel.app",
+  plugins: [react()],
+  build: {
+    manifest: true,
+    rollupOptions: {
+      input: "./src/main.tsx",
     },
   },
-  plugins: [react()],
 });

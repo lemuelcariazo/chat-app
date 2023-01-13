@@ -18,13 +18,13 @@ function Chat() {
   const { config } = useConfig();
   const [isLoading, setIsloading] = useState<boolean>(false);
 
-  const { data, loading, error } = useFetch("/api/protected");
+  const { data, loading, error } = useFetch(config.BASE_URL + "/api/protected");
 
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsloading(true);
     try {
-      const response = await axios.delete("/api/logout");
+      const response = await axios.delete(config.BASE_URL + "/api/logout");
       console.log({
         modal: response.data?.message,
       });
