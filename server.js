@@ -41,14 +41,14 @@ mongoose.connect(
 );
 
 app.use("/api", routes);
-app.use(express.static(path.join(__dirname, "./client")));
-app.get("*", (__, res) => {
-  res.sendFile(path.join(__dirname, "./client/index.htmls"), (err) => {
-    if (err) {
-      res.status(400).send(err);
-    }
-  });
-});
+// app.use(express.static(path.join(__dirname, "./client")));
+// app.get("*", (__, res) => {
+//   res.sendFile(path.join(__dirname, "./client/index.htmls"), (err) => {
+//     if (err) {
+//       res.status(400).send(err);
+//     }
+//   });
+// });
 
 const port = development.port || 5000;
 app.listen(port, () => {
